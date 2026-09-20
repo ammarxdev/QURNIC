@@ -10,7 +10,7 @@ const NAV = [
   { label: "Contact", href: "#contact" },
 ];
 
-const WHATSAPP = "https://wa.me/923001234567";
+const WHATSAPP = "https://wa.me/923356334912";
 
 /* ---------- small building blocks ---------- */
 
@@ -815,7 +815,7 @@ function Footer() {
             </h4>
             <ul className="mt-4 space-y-2 font-[var(--font-body)] text-sm text-ink-soft">
               <li>
-                <a href={WHATSAPP} className="hover:text-green">WhatsApp: +92 300 1234567</a>
+                <a href={WHATSAPP} className="hover:text-green">WhatsApp: +92 335 6334912</a>
               </li>
               <li>
                 <a href="mailto:hello@nooracademy.com" className="hover:text-green">hello@nooracademy.com</a>
