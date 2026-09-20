@@ -1,6 +1,7 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
 
-const ACADEMY = "Noor Academy";
+const ACADEMY = "IEDO Academy";
 
 const NAV = [
   { label: "Quran Courses", href: "#quran" },
@@ -425,8 +426,8 @@ function Teachers() {
         <div className="mt-12 grid grid-cols-1 gap-8 overflow-hidden rounded-3xl border border-line bg-green-forest text-cream md:grid-cols-[0.8fr_1.2fr]">
           <div className="bg-green-deep">
             <img
-              src="https://images.unsplash.com/photo-1627091908405-30bd51eec537?w=600&h=700&fit=crop&auto=format"
-              alt="Portrait of Afaaq Ahmed, founder and CEO of Noor Academy"
+              src="/pexels-muhtelifane-70593160-34982271.jpg"
+              alt="Portrait of Sarfraz Ahmad, founder and CEO of IEDO Academy"
               className="h-72 w-full object-cover md:h-full"
               loading="lazy"
             />
@@ -436,14 +437,14 @@ function Teachers() {
               Founder & CEO
             </span>
             <h3 className="mt-3 font-[var(--font-display)] text-3xl font-semibold">
-              Afaaq Ahmed
+              Sarfraz Ahmad
             </h3>
             <p className="mt-1 font-[var(--font-body)] text-sm font-medium text-gold-soft">
               20 years of teaching experience · Quran, Tafseer &amp; Tajweed
             </p>
             <p className="mt-4 max-w-lg font-[var(--font-body)] text-cream/85 leading-relaxed">
-              With two decades spent teaching the Quran and its meaning, Afaaq founded
-              Noor Academy on one belief: every child, anywhere in the world, deserves
+              With two decades spent teaching the Quran and its meaning, Sarfraz founded
+              IEDO Academy on one belief: every child, anywhere in the world, deserves
               a patient, qualified teacher. He personally trains and mentors every tutor
               on our team.
             </p>
@@ -577,7 +578,7 @@ function Pricing() {
 function Testimonials() {
   const quotes = [
     ["My daughter looks forward to her Quran class every day. Her teacher is patient and kind, and I finally found a female tutor I trust.", "Sana Malik", "Lahore, Pakistan"],
-    ["Living in the UK, I worried my son would lose his Urdu and Quran. Noor Academy made it effortless, and his Math grades went up too.", "Ahmed R.", "Manchester, UK"],
+    ["Living in the UK, I worried my son would lose his Urdu and Quran. IEDO Academy made it effortless, and his Math grades went up too.", "Ahmed R.", "Manchester, UK"],
     ["The free trial sold us. No pressure, real teaching. Three months in and my kids are thriving.", "Fatima Zahra", "Toronto, Canada"],
   ];
   return (
@@ -665,6 +666,7 @@ function FAQ() {
 
 function Booking() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
   return (
     <section id="book" className="scroll-mt-24 bg-green-forest py-20 text-cream lg:py-28">
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-5 lg:grid-cols-2">
@@ -705,24 +707,58 @@ function Booking() {
             </div>
           ) : (
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                setSent(true);
+                if (loading) return;
+                const formData = new FormData(e.currentTarget);
+                const phone = formData.get("phone");
+                const confirmPhone = formData.get("confirmPhone");
+
+                if (phone !== confirmPhone) {
+                  alert("WhatsApp numbers do not match!");
+                  return;
+                }
+
+                const data = {
+                  name: formData.get("name"),
+                  phone,
+                  age: formData.get("age"),
+                  email: formData.get("email") || "N/A"
+                };
+                try {
+                  setLoading(true);
+                  const res = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                  });
+                  if (res.ok) setSent(true);
+                } catch (error) {
+                  console.error(error);
+                } finally {
+                  setLoading(false);
+                }
               }}
               className="space-y-4"
             >
               <h3 className="font-[var(--font-display)] text-2xl font-semibold text-green-forest">
                 Book a free trial
               </h3>
-              <Field label="Parent’s name">
-                <input required type="text" placeholder="e.g. Ayesha Khan" className={inputCls} />
+              <Field label="Parent's name">
+                <input name="name" required type="text" placeholder="e.g. Ayesha Khan" className={inputCls} />
+              </Field>
+              <Field label="Email address">
+                <input name="email" required type="email" placeholder="e.g. ayesha@example.com" className={inputCls} />
               </Field>
               <Field label="WhatsApp number">
-                <input required type="tel" placeholder="+92 300 1234567" className={inputCls} />
+                <input name="phone" required type="tel" placeholder="+92 300 1234567" className={inputCls} />
+              </Field>
+              <Field label="Confirm WhatsApp number">
+                <input name="confirmPhone" required type="tel" placeholder="+92 300 1234567" className={inputCls} />
               </Field>
               <div className="grid grid-cols-2 gap-4">
                 <Field label="Child’s class / age">
-                  <select required className={inputCls} defaultValue="">
+                  <select name="age" required className={inputCls} defaultValue="">
                     <option value="" disabled>Select</option>
                     <option>Quran (any age)</option>
                     {Array.from({ length: 10 }, (_, i) => (
@@ -742,9 +778,10 @@ function Booking() {
               </div>
               <button
                 type="submit"
-                className="mt-2 w-full rounded-full bg-gold px-6 py-3.5 font-[var(--font-body)] text-sm font-semibold text-green-forest transition-colors hover:bg-green hover:text-cream"
+                disabled={loading}
+                className="mt-2 w-full rounded-full bg-gold px-6 py-3.5 font-[var(--font-body)] text-sm font-semibold text-green-forest transition-colors hover:bg-green hover:text-cream disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Book my free trial class
+                {loading ? "Sending..." : "Book my free trial class"}
               </button>
               <p className="text-center font-[var(--font-body)] text-xs text-ink-soft">
                 No card required · We reply within a few hours
@@ -818,7 +855,7 @@ function Footer() {
                 <a href={WHATSAPP} className="hover:text-green">WhatsApp: +92 335 6334912</a>
               </li>
               <li>
-                <a href="mailto:hello@nooracademy.com" className="hover:text-green">hello@nooracademy.com</a>
+                <a href="mailto:onlineacadmy@iedo.site" className="hover:text-green">onlineacadmy@iedo.site</a>
               </li>
               <li className="flex gap-3 pt-2">
                 {["Facebook", "Instagram", "YouTube"].map((s) => (
