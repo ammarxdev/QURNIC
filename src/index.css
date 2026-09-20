@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Spectral', Georgia, serif;
+  --font-body: 'Mulish', system-ui, sans-serif;
+  --font-arabic: 'Amiri', 'Spectral', serif;
+
+  --color-cream: #faf7f0;
+  --color-cream-deep: #f2ece0;
+  --color-ink: #26302b;
+  --color-ink-soft: #5b665f;
+  --color-green: #0b6e4f;
+  --color-green-deep: #084d38;
+  --color-green-forest: #063a2b;
+  --color-gold: #d4a017;
+  --color-gold-soft: #e8c976;
+  --color-sky: #6ba3ad;
+  --color-line: #e3dccc;
+}
+
+:root {
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-gold-soft);
+  color: var(--color-green-forest);
+}
+
+/* Hide scrollbars until scrolling */
+* {
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
