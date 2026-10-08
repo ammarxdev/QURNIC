@@ -493,19 +493,19 @@ function Pricing() {
   const tiers = [
     {
       name: "Quran Only",
-      price: "$29",
+      price: "Contact With Us",
       popular: false,
       features: ["3 classes / week", "30 min per class", "Qaida, Nazra or Hifz", "Monthly progress report"],
     },
     {
       name: "Combo: Quran + Academics",
-      price: "$59",
+      price: "Contact With Us",
       popular: true,
       features: ["5 classes / week", "40 min per class", "Any Quran + 2 school subjects", "Priority tutor matching", "Monthly progress report"],
     },
     {
       name: "Academic Only",
-      price: "$35",
+      price: "Contact With Us",
       popular: false,
       features: ["3 classes / week", "40 min per class", "Up to 2 school subjects", "Syllabus-aligned homework help"],
     },
@@ -543,10 +543,7 @@ function Pricing() {
               {t.name}
             </h3>
             <p className="mt-4 flex items-baseline gap-1">
-              <span className="font-[var(--font-display)] text-4xl font-semibold">{t.price}</span>
-              <span className={`font-[var(--font-body)] text-sm ${t.popular ? "text-cream/70" : "text-ink-soft"}`}>
-                / month
-              </span>
+              <span className="font-[var(--font-display)] text-3xl font-semibold">{t.price}</span>
             </p>
             <ul className="mt-6 flex-1 space-y-3">
               {t.features.map((f) => (
