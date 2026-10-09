@@ -172,7 +172,7 @@ function Hero() {
         <div className="relative">
           <div className="overflow-hidden rounded-[2rem] rounded-tr-[5rem] border border-line bg-cream-deep shadow-xl">
             <img
-              src="https://images.unsplash.com/photo-1758612898312-708f2ffdcd53?w=900&h=1000&fit=crop&auto=format"
+              src="/hero-boy.jpg"
               alt="A young boy attending a live online lesson at a laptop with his notebook at home"
               className="h-[26rem] w-full object-cover lg:h-[32rem]"
               loading="eager"
@@ -399,19 +399,19 @@ function Teachers() {
       name: "Hafiza Ayesha Siddiqa",
       qual: "Ijazah in Tajweed · 6 years teaching",
       note: "Specialises in Hifz and gentle beginner Qaida for young learners.",
-      img: "https://images.unsplash.com/photo-1634451784126-b9f7282edb1b?w=500&h=600&fit=crop&auto=format",
+      img: "/ayesha.jpg",
     },
     {
       name: "Qari Bilal Ahmed",
       qual: "Certified Qari · 8 years teaching",
       note: "Nazra and Tajweed with a calm, patient teaching style.",
-      img: "https://images.unsplash.com/photo-1598698230199-f7f08ed4234b?w=500&h=600&fit=crop&auto=format",
+      img: "/bilal.jpg",
     },
     {
       name: "Ustadha Maryam Khan",
       qual: "M.Sc Mathematics · 5 years teaching",
       note: "Class 6–10 Math & Science, aligned to school syllabus.",
-      img: "https://images.unsplash.com/photo-1654729504239-8c2abeb26d96?w=500&h=600&fit=crop&auto=format",
+      img: "/maryam.jpg",
     },
   ];
   return (
@@ -426,9 +426,9 @@ function Teachers() {
         <div className="mt-12 grid grid-cols-1 gap-8 overflow-hidden rounded-3xl border border-line bg-green-forest text-cream md:grid-cols-[0.8fr_1.2fr]">
           <div className="bg-green-deep">
             <img
-              src="/pexels-muhtelifane-70593160-34982271.jpg"
+              src="/WhatsApp Image 2026-10-09 at 2.48.12 AM.jpeg"
               alt="Portrait of Sarfraz Ahmad, founder and CEO of IEDO Academy"
-              className="h-72 w-full object-cover md:h-full"
+              className="h-72 w-full object-cover object-[center_30%] md:h-full"
               loading="lazy"
             />
           </div>
@@ -464,7 +464,7 @@ function Teachers() {
                 <img
                   src={t.img}
                   alt={`Portrait of ${t.name}`}
-                  className="h-64 w-full object-cover"
+                  className="h-64 w-full object-cover object-top"
                   loading="lazy"
                 />
               </div>
